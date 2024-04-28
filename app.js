@@ -1,10 +1,11 @@
 // import express from "express";
 // import axios from "axios";
-import { getRandomNumber } from "./service/GetRandomNumber.js";
-import { createInterface } from "readline";
-import { stdin, stdout } from "process";
-import { mainGame } from "./game.js";
+// import { createInterface } from "readline";
+// import { stdin, stdout } from "process";
+// import { mainGame } from "./game.js";
 import { Game } from "./model/Game.js";
+import { Player } from "./model/Player.js";
+import { rl, userInput } from "./service/UserInputs.js";
 // import { getRandomNumber } from "./controller/randomNumber.js";
 
 const players = [];
@@ -19,10 +20,10 @@ class Player {
   }
 }
 
-export const rl = createInterface({
-  input: stdin,
-  output: stdout,
-});
+// export const rl = createInterface({
+//   input: stdin,
+//   output: stdout,
+// });
 
 // const getRandomNumber = async () => {
 //   const result = await axios.get("https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new");
@@ -31,18 +32,18 @@ export const rl = createInterface({
 //   return codeInOneLine;
 // };
 
-const getInfo = async () => {
-  return await new Promise((resolve, _reject) => {
-    rl.question("What is the name of the player? ", answer => {
-      if (!answer) {
-        console.log("Invalid Entry for Name");
-        getInfo().then(resolve);
-      } else {
-        resolve(answer);
-      }
-    });
-  });
-};
+// const getInfo = async () => {
+//   return await new Promise((resolve, _reject) => {
+//     rl.question("What is the name of the player? ", answer => {
+//       if (!answer) {
+//         console.log("Invalid Entry for Name");
+//         getInfo().then(resolve);
+//       } else {
+//         resolve(answer);
+//       }
+//     });
+//   });
+// };
 
 // BELOW WORKING CODE, TRYING TO USE WHILE LOOP ABOVE
 // const getInfo = async () => {
@@ -57,31 +58,31 @@ const getInfo = async () => {
 //   });
 // };
 
-const createPlayer = async () => {
-  let name;
-  // try {
-  //   while (!name) {
-  //     name = await getInfo();
-  //     if (!name) {
-  //       console.log("Invalid Entry for Name");
-  //     } else {
-  //       console.log("Hello", name);
-  //     }
-  //   }
-  // } catch (error) {
-  //   throw new Error("Something went wrong while creating a player");
-  // }
+// const createPlayer = async () => {
+//   let name;
+//   // try {
+//   //   while (!name) {
+//   //     name = await getInfo();
+//   //     if (!name) {
+//   //       console.log("Invalid Entry for Name");
+//   //     } else {
+//   //       console.log("Hello", name);
+//   //     }
+//   //   }
+//   // } catch (error) {
+//   //   throw new Error("Something went wrong while creating a player");
+//   // }
 
-  try {
-    name = await getInfo();
-    console.log("Hello", name);
-  } catch (error) {
-    console.error("Error while creating player", error);
-  }
+//   try {
+//     name = await getInfo();
+//     console.log("Hello", name);
+//   } catch (error) {
+//     console.error("Error while creating player", error);
+//   }
 
-  const player = new Player(name);
-  return player;
-};
+//   const player = new Player(name);
+//   return player;
+// };
 
 // const main = async () => {
 //   try {
@@ -117,18 +118,23 @@ const main = async () => {
     let gameCode = await game.createNum();
     game.code = gameCode;
     console.log("GET", game.code);
-    const createdPlayer = await createPlayer();
-    const gameResult = await mainGame(createdPlayer.name);
 
-    if (gameResult === "Game Over") {
-      console.log("You did not solve the game");
-    } else {
-      console.log("You have solved the Game");
-    }
+    const playerName = await userInput("name");
 
-    console.log(createdPlayer);
-    players.push(createdPlayer);
-    console.log(players);
+    console.log("playerName: ", playerName);
+
+    // const createdPlayer = await createPlayer();
+    // const gameResult = await mainGame(createdPlayer.name);
+
+    // if (gameResult === "Game Over") {
+    //   console.log("You did not solve the game");
+    // } else {
+    //   console.log("You have solved the Game");
+    // }
+
+    // console.log(createdPlayer);
+    // players.push(createdPlayer);
+    // console.log(players);
     //
   } catch (error) {
     console.error("Error: ", error);

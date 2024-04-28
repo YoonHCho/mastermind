@@ -22,6 +22,7 @@ const validateCode = async (code, userGuess) => {
   let correctNumbers = 0;
   let correctLocations = 0;
   const guessCheck = {};
+  let response = "";
 
   for (let i of userGuess) {
     const index = userGuess.indexOf(i);
@@ -41,17 +42,19 @@ const validateCode = async (code, userGuess) => {
       guessCheck[`${i}`] = code.indexOf(i);
     }
   }
+  response += `\n${userGuess}: `;
   if (!correctNumbers && !correctLocations) {
-    console.log(`\nAll Incorrect`);
+    console.log(response + "All Incorrect");
     return { [`${userGuess}`]: "All Incorrect" };
   } else if (correctNumbers === 4 && correctLocations === 4) {
-    console.log(`\nCongratulations the number to solve was ${code} and you guessed correctly: ${userGuess}`);
+    console.log(response + `Congratulations the number to solve was ${code} and you guessed correctly: ${userGuess}`);
     return "end game";
   } else {
     console.log(
-      `\n${correctNumbers} correct ${correctNumbers > 1 ? "numbers" : "number"} and ${correctLocations} correct ${
-        correctLocations > 1 ? "locations" : "location"
-      }`
+      response +
+        `${correctNumbers} correct ${correctNumbers > 1 ? "numbers" : "number"} and ${correctLocations} correct ${
+          correctLocations > 1 ? "locations" : "location"
+        }`
     );
     return {
       [`${userGuess}`]: `Correct ${correctNumbers > 1 ? "Numbers" : "Number"}: ${correctNumbers} and Correct ${
@@ -108,7 +111,6 @@ export const mainGame = async player => {
       break;
     }
     playerGuesses.push(JSON.stringify(result));
-    console.log("RESULT: ", result);
 
     numOfTries--;
   }
