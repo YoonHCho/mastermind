@@ -2,6 +2,7 @@
 import axios from "axios";
 import { createInterface } from "readline";
 import { stdin, stdout } from "process";
+import { mainGame } from "./game.js";
 // import { getRandomNumber } from "./controller/randomNumber.js";
 
 let code;
@@ -17,6 +18,11 @@ class Player {
   }
 }
 
+export const rl = createInterface({
+  input: stdin,
+  output: stdout,
+});
+
 const getRandomNumber = async () => {
   const result = await axios.get("https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new");
   const codeInOneLine = result.data.split("\n").join("");
@@ -24,14 +30,9 @@ const getRandomNumber = async () => {
   return codeInOneLine;
 };
 
-const read = createInterface({
-  input: stdin,
-  output: stdout,
-});
-
 const getInfo = async () => {
   return await new Promise((resolve, _reject) => {
-    read.question("What is the name of the player? ", answer => {
+    rl.question("What is the name of the player? ", answer => {
       if (!answer) {
         console.log("Invalid Entry for Name");
         getInfo().then(resolve);
@@ -45,7 +46,7 @@ const getInfo = async () => {
 // BELOW WORKING CODE, TRYING TO USE WHILE LOOP ABOVE
 // const getInfo = async () => {
 //   return await new Promise((resolve, reject) => {
-//     read.question("What is the name of the player? ", answer => {
+//     rl.question("What is the name of the player? ", answer => {
 //       if (!answer) {
 //         reject(new Error("Invalid Entry for Name"));
 //       } else {
@@ -87,14 +88,14 @@ const getUserGuess = async code => {
   let correctLocation;
   console.log(`You have ${numOfTries} to get correct 4-digit combination`);
   // try {
-  //   read.question("Please guess 4-digit combination: ", answer => {
+  //   rl.question("Please guess 4-digit combination: ", answer => {
   //     if (answer.trim().length !== 4) {
 
   //     }
   //   })
   // }
   while (numOfTries > 0) {
-    const answer = await read.question("Please guess 4-digit combination: ");
+    const answer = await rl.question("Please guess 4-digit combination: ");
     if (answer.trim().length !== 4 || isNaN(Number(answer))) {
       console.log("You need to input 4-digit numbers");
     }
@@ -104,9 +105,14 @@ const getUserGuess = async code => {
 const main = async () => {
   try {
     code = await getRandomNumber();
-    console.log(typeof code);
     const createdPlayer = await createPlayer();
-    // await getUserGuess();
+    const gameResult = await mainGame(createdPlayer.name);
+
+    if (gameResult === "Game Over") {
+      console.log("You did not solve the game");
+    } else {
+      console.log("You have solved the Game");
+    }
 
     console.log(createdPlayer);
     players.push(createdPlayer);
@@ -115,7 +121,7 @@ const main = async () => {
   } catch (error) {
     console.error("Error: ", error);
   } finally {
-    read.close();
+    rl.close();
   }
 };
 
