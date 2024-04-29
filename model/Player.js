@@ -2,20 +2,39 @@ class Player {
   static nextId = 1;
 
   constructor(name) {
-    this.id = Player.nextId++;
-    this.name = name;
-    this.history = [];
+    this._id = Player.nextId++;
+    this._name = name;
+    this._score = 0;
+    this._history = [];
   }
 
-  get name() {
-    return this.name;
+  getName() {
+    return this._name;
   }
 
-  get history() {
-    return this.history;
+  getScore() {
+    return this._score;
   }
 
-  set history(record) {
-    this.history.push(record);
+  getHistory() {
+    return this._history;
+  }
+
+  setHistory(record) {
+    this._history.push(record);
   }
 }
+
+class ManagePlayers {
+  static playersList = [];
+
+  static addToPlayersList(player) {
+    ManagePlayers.playersList.push(player);
+  }
+
+  static getPlayersList() {
+    return ManagePlayers.playersList;
+  }
+}
+
+export { Player, ManagePlayers };

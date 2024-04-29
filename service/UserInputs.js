@@ -6,19 +6,20 @@ const rl = createInterface({
   output: stdout,
 });
 
-const userInput = async whatInput => {
-  let ask;
+const userInput = async ask => {
+  // let ask;
 
-  if (whatInput === "name") {
-    ask = "Name of the player? ";
-  } else if (whatInput === "guess") {
-    ask = "Guess the 4-digit Number: ";
-  }
+  // if (whatInput === "name") {
+  //   ask = "Name of the player? ";
+  // } else if (whatInput === "guess") {
+  //   ask = "Guess the 4-digit Number: ";
+  // }
 
   return new Promise(resolve => {
     rl.question(ask, answer => {
       if (!answer) {
         console.log("Cannot have an empty input");
+        userInput(ask).then(resolve);
       } else {
         resolve(answer);
       }

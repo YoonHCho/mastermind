@@ -32,7 +32,6 @@ const validateCode = async (code, userGuess) => {
     if (code.includes(i) && guessCheck[`${i}`]) {
       const startIndex = guessCheck[`${i}`] + 1;
       const slicedCode = code.slice(startIndex);
-      console.log("slicedCode: ", slicedCode);
       if (slicedCode.includes(i)) {
         correctNumbers++;
         guessCheck[`${i}`] = code.indexOf(i, startIndex);
@@ -90,9 +89,9 @@ const validateInput = async (testCode, userGuess) => {
   // }
 };
 
-export const mainGame = async player => {
+export const mainGame = async (gameCode, player) => {
   let numOfTries = 10;
-  const testCode = "1111";
+  const testCode = gameCode;
   let gotAnswer = false;
   let gameOver = false;
 

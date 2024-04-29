@@ -118,17 +118,13 @@ const main = async () => {
     game.code = gameCode;
     console.log("GET", game.code);
     const createdPlayer = await createPlayer();
-    const gameResult = await mainGame(createdPlayer.name);
+    const gameResult = await mainGame(game.code, createdPlayer.name);
 
     if (gameResult === "Game Over") {
       console.log("You did not solve the game");
     } else {
       console.log("You have solved the Game");
     }
-
-    console.log(createdPlayer);
-    players.push(createdPlayer);
-    console.log(players);
     //
   } catch (error) {
     console.error("Error: ", error);
