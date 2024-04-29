@@ -118,16 +118,12 @@ const main = async () => {
     const game = new Game();
     game.start();
     let gameCode = await game.createNum();
-    game.code = gameCode;
-    console.log("GET", game.code);
+    console.log("gameCode: ", gameCode);
+    game.setCode(gameCode);
+    console.log("GET", game.getCode());
 
     await createPlayers(`\nWhen finished adding players type 'finish'\nName of a player? `);
 
-    // const playerName = await userInput("Name of the player? ");
-
-    // console.log("playerName: ", playerName);
-
-    // const player = new Player(playerName);
     // const gameResult = await PlayGame(player);
 
     // const createdPlayer = await createPlayer();
