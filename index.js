@@ -115,10 +115,10 @@ const main = async () => {
     const game = new Game();
     game.start();
     let gameCode = await game.createNum();
-    game.code = gameCode;
-    console.log("GET", game.code);
+    game.setCode(gameCode);
+    console.log("GET", game.getCode());
     const createdPlayer = await createPlayer();
-    const gameResult = await mainGame(game.code, createdPlayer.name);
+    const gameResult = await mainGame(game.getCode(), createdPlayer.name);
 
     if (gameResult === "Game Over") {
       console.log("You did not solve the game");

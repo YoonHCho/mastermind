@@ -5,11 +5,11 @@ export class Game {
     this._code = undefined;
   }
 
-  get code() {
+  getCode() {
     return this._code;
   }
 
-  set code(code) {
+  setCode(code) {
     this._code = code;
   }
 
