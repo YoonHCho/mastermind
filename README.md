@@ -1,12 +1,13 @@
 # Mastermind Game
 
-UPDATE 4/27 WOP
+- Need to do: code clean up once app.js is working same as index.js
+- UPDATE 4/28 WOP: created 2 classes Player and ManagePlayers. For reusability and to use OOP. Able to create Multi-player (however the current WOP is for a single player, just implemented feature to create multi-player).
 
 index.js works as intended
 
 1. user can guess 4 numbers
 2. user can view history of guesses and their feedback
-3. number of attempt remaining
+3. number of attempts remaining
 
 testing with app.js for separation
 

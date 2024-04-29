@@ -6,19 +6,20 @@
 import { Game } from "./model/Game.js";
 import { Player } from "./model/Player.js";
 import { rl, userInput } from "./service/UserInputs.js";
+import { createPlayers } from "./service/CreatePlayers.js";
 // import { getRandomNumber } from "./controller/randomNumber.js";
 
-const players = [];
+// const players = [];
 
-class Player {
-  // static property only belongs to the class itself and not the instances of the class
-  static nextId = 1;
+// class Player {
+//   // static property only belongs to the class itself and not the instances of the class
+//   static nextId = 1;
 
-  constructor(name) {
-    this.id = Player.nextId++;
-    this.name = name;
-  }
-}
+//   constructor(name) {
+//     this.id = Player.nextId++;
+//     this.name = name;
+//   }
+// }
 
 // export const rl = createInterface({
 //   input: stdin,
@@ -112,6 +113,7 @@ class Player {
 
 // trying with new
 const main = async () => {
+  console.log("THIS IS APP.JS");
   try {
     const game = new Game();
     game.start();
@@ -119,9 +121,14 @@ const main = async () => {
     game.code = gameCode;
     console.log("GET", game.code);
 
-    const playerName = await userInput("name");
+    await createPlayers(`\nWhen finished adding players type 'finish'\nName of a player? `);
 
-    console.log("playerName: ", playerName);
+    // const playerName = await userInput("Name of the player? ");
+
+    // console.log("playerName: ", playerName);
+
+    // const player = new Player(playerName);
+    // const gameResult = await PlayGame(player);
 
     // const createdPlayer = await createPlayer();
     // const gameResult = await mainGame(createdPlayer.name);
