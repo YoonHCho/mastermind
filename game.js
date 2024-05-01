@@ -29,16 +29,16 @@ const validateCode = async (code, userGuess) => {
     if (code[index] === userGuess[index]) {
       correctLocations++;
     }
-    if (code.includes(i) && guessCheck[`${i}`]) {
-      const startIndex = guessCheck[`${i}`] + 1;
-      const slicedCode = code.slice(startIndex);
-      if (slicedCode.includes(i)) {
+    if (code.includes(i) && guessCheck[i]) {
+      const startIndex = guessCheck[i] + 1;
+      const nextIndex = code.indexOf(i, startIndex);
+      if (nextIndex !== -1) {
         correctNumbers++;
-        guessCheck[`${i}`] = code.indexOf(i, startIndex);
+        guessCheck[i] = nextIndex;
       }
     } else if (code.includes(i)) {
       correctNumbers++;
-      guessCheck[`${i}`] = code.indexOf(i);
+      guessCheck[i] = code.indexOf(i);
     }
   }
   response += `\n${userGuess}: `;

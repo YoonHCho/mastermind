@@ -4,9 +4,10 @@
 // import { stdin, stdout } from "process";
 // import { mainGame } from "./game.js";
 import { Game } from "./model/Game.js";
-import { Player } from "./model/Player.js";
+import { Player, ManagePlayers } from "./model/Player.js";
 import { rl, userInput } from "./service/UserInputs.js";
 import { createPlayers } from "./service/CreatePlayers.js";
+import { PlayGame } from "./service/PlayGame.js";
 // import { getRandomNumber } from "./controller/randomNumber.js";
 
 // const players = [];
@@ -123,6 +124,8 @@ const main = async () => {
     console.log("GET", game.getCode());
 
     await createPlayers(`\nWhen finished adding players type 'finish'\nName of a player? `);
+
+    const result = await PlayGame(game.getCode(), ManagePlayers.getPlayersList());
 
     // const gameResult = await PlayGame(player);
 
