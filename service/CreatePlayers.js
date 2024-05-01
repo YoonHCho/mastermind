@@ -10,5 +10,5 @@ export const createPlayers = async ask => {
     playerName = await userInput(ask);
   }
 
-  console.log(ManagePlayers.getPlayersList());
+  // console.log(ManagePlayers.getPlayersList());
 };

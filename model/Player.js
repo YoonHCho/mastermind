@@ -6,6 +6,8 @@ class Player {
     this._name = name;
     this._score = 0;
     this._history = [];
+    this._solved = false;
+    this._hintIndex = 0;
   }
 
   getName() {
@@ -21,7 +23,15 @@ class Player {
   }
 
   setHistory(record) {
-    this._history.push(record);
+    this._history.push(JSON.stringify(record));
+  }
+
+  setPlayerSolved() {
+    this._solved = !this._solved;
+  }
+
+  setPlayerHintIndex() {
+    this._hintIndex++;
   }
 }
 
