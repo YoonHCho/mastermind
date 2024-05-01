@@ -22,6 +22,18 @@ class Player {
     return this._history;
   }
 
+  getHintIndex() {
+    return this._hintIndex++;
+  }
+
+  getSolved() {
+    return this._solved;
+  }
+
+  setScore(score) {
+    this._score = score;
+  }
+
   setHistory(record) {
     this._history.push(JSON.stringify(record));
   }
