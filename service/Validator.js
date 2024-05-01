@@ -1,8 +1,6 @@
 import { gameUI } from "../frontend/GameUI.js";
 
 export const validateCode = (code, userGuess, player) => {
-  console.log("validate code = CODE:", code);
-  console.log("validate code = USERGUESS:", userGuess);
   let correctNumbers = 0;
   let correctLocations = 0;
   const guessResult = {};
@@ -49,8 +47,9 @@ export const validateCode = (code, userGuess, player) => {
   //   }
   // }
   gameUI.validateCodeResponse(userGuess, correctNumbers, correctLocations, player);
-  console.log("guessResult", guessResult);
-  return guessResult;
+  if (correctNumbers === 4 && correctLocations === 4) {
+    return "Solved";
+  }
 };
 
 const validateUserInput = () => {};
