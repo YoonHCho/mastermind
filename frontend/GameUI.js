@@ -70,21 +70,27 @@ class GameUI {
     console.log(`\n\tNo more hints remaining`);
   }
 
+  numGenerated(level) {
+    console.log(
+      `\n\t${level}-digit numbers generated.\n\tLet's add player(s)!\n\n\t** Please note, numbers will range from 0 to 7.\n\t** if you include number 8 or 9 in your attempts, it will decrease your attempts.`
+    );
+  }
+
   startLog() {
     console.log(`
-      ******************************************
-      *       Welcome To Mastermind Game       *
-      *        Created By Yoon Hwan Cho        *
-      ******************************************
+        ******************************************
+        *       Welcome To Mastermind Game       *
+        *        Created By Yoon Hwan Cho        *
+        ******************************************
     `);
   }
 
   endLog() {
     console.log(`
-      ******************************************
-      * Thank you for playing Mastermind Game  *
-      *        Created By Yoon Hwan Cho        *
-      ******************************************
+        ******************************************
+        * Thank you for playing Mastermind Game  *
+        *        Created By Yoon Hwan Cho        *
+        ******************************************
     `);
   }
 
@@ -99,7 +105,7 @@ class GameUI {
   }
 
   calculatingScore() {
-    console.log("\nCalculating score, please wait...");
+    console.log("\nGame Finished.\nCalculating score, please wait...");
   }
 
   logHighestPlayers(players, score) {
