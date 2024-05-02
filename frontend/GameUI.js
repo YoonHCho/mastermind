@@ -1,6 +1,6 @@
 class GameUI {
   logAndSetHistory(player, userGuess, response) {
-    console.log(`${player.getName()},\n${userGuess}: ${response}\n`);
+    console.log(`\n\t${player.getName()},\n\t${userGuess}: ${response}`);
     player.setHistory({ [`${userGuess}`]: `${response}` });
   }
 
@@ -31,11 +31,11 @@ class GameUI {
   }
 
   logPlayerNameAndAttempts(player, attempts) {
-    console.log(`\n${player.getName()}, you have ${attempts} attempts left`);
+    console.log(`\n${player}, you have ${attempts} attempts left`);
   }
 
   logHint(placement, number) {
-    console.log('\t"Hint"\n\t' + placement);
+    console.log('\n\t"Hint"\n\t' + placement);
     switch (number) {
       case "0":
         console.log("\tI hold no identity. I am the empty vessel, ready to be filled with any data. What am I?");
@@ -67,7 +67,7 @@ class GameUI {
   }
 
   noMoreHint() {
-    console.log(`\tNo more hints remaining`);
+    console.log(`\n\tNo more hints remaining`);
   }
 
   startLog() {
@@ -75,9 +75,35 @@ class GameUI {
       ******************************************
       *       Welcome To Mastermind Game       *
       *        Created By Yoon Hwan Cho        *
-      *      Generating A 4-digit Number       *
       ******************************************
     `);
+  }
+
+  endLog() {
+    console.log(`
+      ******************************************
+      * Thank you for playing Mastermind Game  *
+      *        Created By Yoon Hwan Cho        *
+      ******************************************
+    `);
+  }
+
+  solvedMessage(name, code, score) {
+    console.log(`\n\tCongratulations, ${name}. You solved the Mastermind Game.
+    \tThe code to guess: ${code}
+    \tYour Score: ${score}`);
+  }
+
+  outOfAttemptMessage(name) {
+    console.log(`\n\tSorry ${name}, you've exhausted all your attempts. The game is over for you. Better luck next time!`);
+  }
+
+  calculatingScore() {
+    console.log("\nCalculating score, please wait...");
+  }
+
+  logHighestPlayers(players, score) {
+    console.log(`\n\t${players.join(", ")}: you finished the Mastermind Game with score: ${score}`);
   }
 }
 

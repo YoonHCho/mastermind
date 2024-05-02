@@ -16,13 +16,14 @@ export const PlayGame = async (code, players, level = 4) => {
 
   while (numOfTries > 0 && playersStillPlaying !== playersSolved.length) {
     for (let i = 0; i < players.length; i++) {
+      const playerName = players[i].getName();
       // console.log("Players", players[i]);
       if (players[i].getSolved()) {
         continue;
       }
 
       while (true) {
-        gameUI.logPlayerNameAndAttempts(players[i], numOfTries);
+        gameUI.logPlayerNameAndAttempts(playerName, numOfTries);
         userGuess = await getUserGuess();
         if (userGuess.toLowerCase() === "history") {
           gameUI.getHistory(players[i]);
@@ -44,13 +45,23 @@ export const PlayGame = async (code, players, level = 4) => {
 
         const result = validateCode(code, userGuess, players[i]);
         if (result === "Solved") {
+          const score = numOfTries * 10;
           players[i].setPlayerSolved();
-          players[i].setScore(numOfTries * 10);
+          players[i].setScore(score);
+          playersSolved.push({
+            name: `${playerName}`,
+            score: `${score}`,
+          });
+          gameUI.solvedMessage(playerName, code, score);
         }
         break;
       }
+      if (numOfTries === 1 && !players[i].getSolved()) {
+        gameUI.outOfAttemptMessage(playerName);
+      }
     }
     numOfTries--;
-    // const validateInput
   }
+  gameUI.calculatingScore();
+  return playersSolved;
 };

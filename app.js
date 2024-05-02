@@ -118,6 +118,7 @@ const main = async () => {
   try {
     const game = new Game();
     game.start();
+    const level = await getLevel();
     let gameCode = await game.createNum();
     console.log("gameCode: ", gameCode);
     game.setCode(gameCode);
@@ -126,7 +127,8 @@ const main = async () => {
     await createPlayers(`\nWhen finished adding players type 'finish'\nName of a player? `);
 
     const result = await PlayGame(game.getCode(), ManagePlayers.getPlayersList());
-
+    game.getHighestScoredPlayer(result);
+    game.end();
     // const gameResult = await PlayGame(player);
 
     // const createdPlayer = await createPlayer();
