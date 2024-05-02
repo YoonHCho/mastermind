@@ -27,9 +27,9 @@ export class Game {
     return await userInput("Please select a level from 4 (easiest) to 8 (hardest): ");
   }
 
-  async createNum() {
+  async createNum(level) {
     try {
-      return await getRandomNumber();
+      return await getRandomNumber(level);
     } catch (error) {
       console.error("Error: ", error);
     }

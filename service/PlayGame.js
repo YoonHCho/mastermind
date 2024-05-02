@@ -3,11 +3,11 @@ import { userInput } from "./UserInputs.js";
 import { gameUI } from "../frontend/GameUI.js";
 import { validateCode } from "./Validator.js";
 
-const getUserGuess = async (level = 4) => {
+const getUserGuess = async level => {
   return await userInput(gameUI.askUserGuess(level));
 };
 
-export const PlayGame = async (code, players, level = 4) => {
+export const PlayGame = async (code, players, level) => {
   console.log("code: ", code);
   let numOfTries = 10;
   const playersStillPlaying = players.length;
@@ -24,7 +24,8 @@ export const PlayGame = async (code, players, level = 4) => {
 
       while (true) {
         gameUI.logPlayerNameAndAttempts(playerName, numOfTries);
-        userGuess = await getUserGuess();
+        // userGuess = await getUserGuess(level);
+        userGuess = await userInput(gameUI.askUserGuess(level));
         if (userGuess.toLowerCase() === "history") {
           gameUI.getHistory(players[i]);
           continue;
@@ -38,7 +39,7 @@ export const PlayGame = async (code, players, level = 4) => {
           const placement = Game.hintIntro(oneBasedIndex);
           gameUI.logHint(placement, code[hintIndex]);
           continue;
-        } else if (userGuess.trim().length !== 4 || isNaN(Number(userGuess))) {
+        } else if (userGuess.trim().length !== Number(level) || isNaN(Number(userGuess))) {
           gameUI.errorUserGuessInput(level);
           continue;
         }
