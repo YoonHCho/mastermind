@@ -30,6 +30,10 @@ class GameUI {
     console.log(`You must type ${level}-digit numbers`);
   }
 
+  mustBePositive(level) {
+    // for when user inputs negative number
+  }
+
   logPlayerNameAndAttempts(player, attempts) {
     console.log(`\n${player}, you have ${attempts} attempts left`);
   }

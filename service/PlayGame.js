@@ -38,6 +38,9 @@ export const PlayGame = async (code, players, level, game) => {
           const placement = game.hintIntro(oneBasedIndex);
           gameUI.logHint(placement, code[hintIndex]);
           continue;
+        } else if (Number(userGuess) < 0) {
+          //must be positive number
+          // gameUI.mustBePositive
         } else if (userGuess.trim().length !== Number(level) || isNaN(Number(userGuess))) {
           gameUI.errorUserGuessInput(level);
           continue;

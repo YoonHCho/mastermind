@@ -4,11 +4,12 @@ import { userInput } from "../service/UserInputs.js";
 import { gameUI } from "../frontend/GameUI.js";
 
 export class Game {
-  constructor() {
-    this._code = null;
-    this._startTime = null;
-    this._endTime = null;
-  }
+  // field
+  _code;
+  _level;
+  _startTime;
+  _endTime;
+  // constructor() {}
 
   getCode() {
     return this._code;
@@ -57,13 +58,18 @@ export class Game {
     return [minutes, seconds];
   }
 
-  async getLevel() {
-    return await userInput("Please select a level from 4 (easiest) to 8 (hardest): ");
+  getLevel() {
+    return this._level;
   }
 
-  async createNum(level) {
+  async setGameLevel() {
+    this._level = await userInput("Please select a level from 4 (easiest) to 8 (hardest): ");
+    this.createNum();
+  }
+
+  async createNum() {
     try {
-      return await getRandomNumber(level);
+      this._code = await getRandomNumber(this._level);
     } catch (error) {
       console.error("Error: ", error);
     }
