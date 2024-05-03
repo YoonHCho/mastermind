@@ -27,11 +27,11 @@ class GameUI {
   }
 
   errorUserGuessInput(level) {
-    console.log(`You must type ${level}-digit numbers`);
+    console.log(`\n\tYou must type ${level}-digit numbers`);
   }
 
-  mustBePositive(level) {
-    // for when user inputs negative number
+  mustBePositive() {
+    console.log("\n\tMust input positive numbers");
   }
 
   logPlayerNameAndAttempts(player, attempts) {
@@ -133,7 +133,7 @@ class GameUI {
   }
 
   simpleLog(code) {
-    console.log(`\n\t${code}`);
+    console.log(`\n\t${code}\n`);
   }
 }
 
