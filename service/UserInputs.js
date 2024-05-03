@@ -27,3 +27,15 @@ const userInput = async ask => {
 };
 
 export { rl, userInput };
+
+// class HI {
+//   rl = createInterface({
+//     input: stdin,
+//     output: stdout,
+//   });
+//   constructor() {}
+
+//   userInput() {
+//     rl.question()
+//   }
+// }
