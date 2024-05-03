@@ -1,10 +1,13 @@
+import { performance } from "perf_hooks";
 import { getRandomNumber } from "../service/GetRandomNumber.js";
 import { userInput } from "../service/UserInputs.js";
 import { gameUI } from "../frontend/GameUI.js";
 
 export class Game {
   constructor() {
-    this._code = undefined;
+    this._code = null;
+    this._startTime = null;
+    this._endTime = null;
   }
 
   getCode() {
@@ -16,11 +19,42 @@ export class Game {
   }
 
   start() {
+    this.setTimeStart();
     gameUI.startLog();
   }
 
   end() {
-    gameUI.endLog();
+    this.setEndTime();
+    const [minutes, seconds] = this.calculateTime(this._startTime, this._endTime);
+    gameUI.endLog(minutes, seconds);
+  }
+
+  setTimeStart() {
+    this._startTime = performance.now();
+  }
+
+  getTimeStart() {
+    return this._startTime;
+  }
+
+  setEndTime() {
+    this._endTime = performance.now();
+  }
+
+  getEndTime() {
+    return this._endTime;
+  }
+
+  getTime() {
+    this._endTime = performance.now();
+    return this.calculateTime(this._startTime, this._endTime);
+  }
+
+  calculateTime(start, end) {
+    const time = Math.floor((end - start) / 1000);
+    const seconds = time % 60;
+    const minutes = Math.floor(time / 60);
+    return [minutes, seconds];
   }
 
   async getLevel() {
@@ -50,7 +84,7 @@ export class Game {
     setTimeout(() => gameUI.logHighestPlayers(highestScorePlayers, highestScore), 3000);
   }
 
-  static hintIntro(index) {
+  hintIntro(index) {
     switch (index) {
       case 1:
         return "First-digit hint:";

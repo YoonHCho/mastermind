@@ -50,7 +50,7 @@ class GameUI {
         console.log("\tI am the number of primary colors for your CSS color property. What am I?");
         break;
       case "4":
-        console.log('\tIn some Eastern cultures, I am feared for my resemblance to "death.". What am I?');
+        console.log("\tIn some Eastern cultures, I am feared because I resemble 'death'. What am I?");
         break;
       case "5":
         console.log("\tI am the one and only prime number that has a sum of two consecutive prime numbers. What am I?");
@@ -78,19 +78,22 @@ class GameUI {
 
   startLog() {
     console.log(`
-        ******************************************
-        *       Welcome To Mastermind Game       *
-        *        Created By Yoon Hwan Cho        *
-        ******************************************
+        **********************************************
+                  Welcome To Mastermind Game
+                   Created By Yoon Hwan Cho
+        **********************************************
     `);
   }
 
-  endLog() {
+  endLog(m, s) {
+    const response = this.arrangeMinAndSec(m, s);
     console.log(`
-        ******************************************
-        * Thank you for playing Mastermind Game  *
-        *        Created By Yoon Hwan Cho        *
-        ******************************************
+        **********************************************
+            Total Playing Time: ${response}
+
+            Thank you for playing Mastermind Game
+                   Created By Yoon Hwan Cho
+        **********************************************
     `);
   }
 
@@ -105,11 +108,28 @@ class GameUI {
   }
 
   calculatingScore() {
-    console.log("\nGame Finished.\nCalculating score, please wait...");
+    console.log("\nGame Finished.\nCalculating highest score, please wait...");
   }
 
   logHighestPlayers(players, score) {
-    console.log(`\n\t${players.join(", ")}: you finished the Mastermind Game with score: ${score}`);
+    if (!score) {
+      console.log(`\n\tNo one was able to solve my game`);
+      return;
+    }
+    console.log(`\n\t${players.join(", ")} finished the Mastermind Game with the highest score: ${score}`);
+  }
+
+  arrangeMinAndSec(min, sec) {
+    return `${min ? `${min} ${min > 1 ? "minutes " : "minute "}` : ""}${sec} ${sec > 1 ? "seconds" : "second"}`;
+  }
+
+  logTime(min, sec) {
+    let response = this.arrangeMinAndSec(min, sec);
+    console.log(`\n\tCurrent Play Time: ${response}`);
+  }
+
+  simpleLog(code) {
+    console.log(`\n\t${code}`);
   }
 }
 
