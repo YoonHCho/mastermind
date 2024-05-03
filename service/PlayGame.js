@@ -1,14 +1,8 @@
-import { Game } from "../model/Game.js";
 import { userInput } from "./UserInputs.js";
 import { gameUI } from "../frontend/GameUI.js";
 import { validateCode } from "./Validator.js";
 
-const getUserGuess = async level => {
-  return await userInput(gameUI.askUserGuess(level));
-};
-
-export const PlayGame = async (code, players, level) => {
-  console.log("code: ", code);
+export const PlayGame = async (code, players, level, game) => {
   let numOfTries = 10;
   const playersStillPlaying = players.length;
   const playersSolved = [];
@@ -17,17 +11,22 @@ export const PlayGame = async (code, players, level) => {
   while (numOfTries > 0 && playersStillPlaying !== playersSolved.length) {
     for (let i = 0; i < players.length; i++) {
       const playerName = players[i].getName();
-      // console.log("Players", players[i]);
       if (players[i].getSolved()) {
         continue;
       }
 
       while (true) {
         gameUI.logPlayerNameAndAttempts(playerName, numOfTries);
-        // userGuess = await getUserGuess(level);
         userGuess = await userInput(gameUI.askUserGuess(level));
         if (userGuess.toLowerCase() === "history") {
           gameUI.getHistory(players[i]);
+          continue;
+        } else if (userGuess.toLowerCase() === "time") {
+          let [minutes, seconds] = game.getTime();
+          gameUI.logTime(minutes, seconds);
+          continue;
+        } else if (userGuess === "getCode") {
+          gameUI.simpleLog(code);
           continue;
         } else if (userGuess.toLowerCase() === "hint") {
           const hintIndex = players[i].getHintIndex();
@@ -36,7 +35,7 @@ export const PlayGame = async (code, players, level) => {
             continue;
           }
           const oneBasedIndex = hintIndex + 1;
-          const placement = Game.hintIntro(oneBasedIndex);
+          const placement = game.hintIntro(oneBasedIndex);
           gameUI.logHint(placement, code[hintIndex]);
           continue;
         } else if (userGuess.trim().length !== Number(level) || isNaN(Number(userGuess))) {
