@@ -28,6 +28,9 @@ export const validateCode = (code, userGuess, player) => {
   if (correctNumbers === code.length && correctLocations === code.length) {
     return "Solved";
   }
+  if (code === userGuess) {
+    return "Solved";
+  }
 };
 
 export const validateLevel = async level => {
