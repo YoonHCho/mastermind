@@ -77,11 +77,18 @@ export class Game {
     const highestScorePlayers = [];
     let highestScore = 0;
 
-    for (let player of players) {
-      if (player.score === 0) continue;
-      if (player.score >= highestScore) {
-        highestScorePlayers.push(player.name);
-        highestScore = player.score;
+    if (players.length !== 0) {
+      for (let player of players) {
+        if (Number(player.score) === 0) continue;
+        if (Number(player.score) >= highestScore) {
+          highestScore = Number(player.score);
+        }
+      }
+
+      for (let player of players) {
+        if (Number(player.score) === highestScore) {
+          highestScorePlayers.push(player.name);
+        }
       }
     }
 

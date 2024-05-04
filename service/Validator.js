@@ -25,9 +25,6 @@ export const validateCode = (code, userGuess, player) => {
   }
 
   gameUI.validateCodeResponse(userGuess, correctNumbers, correctLocations, player);
-  if (correctNumbers === code.length && correctLocations === code.length) {
-    return "Solved";
-  }
   if (code === userGuess) {
     return "Solved";
   }
