@@ -4,12 +4,10 @@ import { userInput } from "../service/UserInputs.js";
 import { gameUI } from "../frontend/GameUI.js";
 
 export class Game {
-  // field
   _code;
   _level;
   _startTime;
   _endTime;
-  // constructor() {}
 
   getCode() {
     return this._code;

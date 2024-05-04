@@ -11,7 +11,7 @@ const rl = createInterface({
 const userInput = async ask => {
   return new Promise(resolve => {
     rl.question(ask, async answer => {
-      if (!answer) {
+      if (!answer || !answer.trim()) {
         gameUI.simpleLog("Cannot have an empty input");
         userInput(ask).then(resolve);
       } else if (ask.startsWith("Please select a level")) {
