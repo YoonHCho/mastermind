@@ -10,7 +10,6 @@ const main = async () => {
   game.start();
   await game.setGameLevel();
   gameUI.numGenerated(game.getLevel());
-
   await createPlayers(`\nWhen finished adding players type 'finish'\nName of a player? `);
   const result = await PlayGame(game.getCode(), ManagePlayers.getPlayersList(), game.getLevel(), game);
   game.getHighestScoredPlayer(result);

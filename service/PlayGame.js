@@ -46,7 +46,7 @@ export const PlayGame = async (code, players, level, game) => {
           continue;
         }
 
-        const result = validateCode(code, userGuess, players[i]);
+        const result = validateCode(code, userGuess.trim(), players[i]);
         if (result === "Solved") {
           const score = numOfTries * 10;
           players[i].setPlayerSolved();
